@@ -6,7 +6,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 object Persistence {
   private val dynamoDbClient = new AmazonDynamoDBAsyncClient()
-  dynamoDbClient.setRegion(new Region(Regions.EU_WEST_1))
+  dynamoDbClient.setRegion(Region.getRegion(Regions.EU_WEST_1))
 
-  val reviews = ReviewsTable(dynamoDbClient, "guReviews")
+  val reviews = ReviewsTable(dynamoDbClient, "guReview")
 }
