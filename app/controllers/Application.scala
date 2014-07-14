@@ -1,10 +1,11 @@
 package controllers
 
+import _root_.data.Persistence
 import play.api._
 import play.api.mvc._
-import model.{Comment, UserId, ContentId, Review}
-import org.joda.time.DateTime
+import model.ContentId
 
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object Application extends Controller {
 
@@ -19,18 +20,9 @@ object Application extends Controller {
     Ok("")
   }
 
-  def displayReviews(contentId: String) = Action {
-    val reviews: List[Review] = List(
-      Review(
-        ContentId("/books/2014/jul/13/empty-mansions-review-bill-dedman-huguette-clark"),
-        UserId("123456"),
-        model.Bored,
-        Some(Comment("Comment")),
-        DateTime.now,
-        rating = 1
-      )
-    ) // TODO @Nick
-
-    Ok(views.html.reviews(reviews))
+  def displayReviews(contentId: String) = Action.async {
+    Persistence.reviews.get(ContentId(contentId), 100) map { reviews =>
+      Ok(views.html.reviews(reviews))
+    }
   }
 }
