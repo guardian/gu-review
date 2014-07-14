@@ -1,4 +1,4 @@
-@(reviews: List[model.Review])
+@(reviews: List[model.Review], domain: String)
 
 <div class="discussion__comments__container">
     <h2 class="page-sub-header discussion__heading js-visible">All reviews <span class="discussion__comment-count">(@reviews.size)</span></h2>
@@ -129,7 +129,7 @@
 
             </div>
 
-            <script src='... @routes.Assets.at("javascripts/update.js")'></script>
+            <script src='@domain/@routes.Assets.at("javascripts/update.js")'></script>
 
         </div></div>
         <div class="discussion__comment-box discussion__comment-box--bottom u-cf"></div>

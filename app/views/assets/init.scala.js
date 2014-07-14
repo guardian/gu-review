@@ -1,4 +1,4 @@
-@(domain: String)
+@(domain: JavaScript)
 
 require(["bonzo", "qwery", "bean", "reqwest"], function(bonzo, qwery, bean, reqwest){
     var $ = function(selector, context) {
