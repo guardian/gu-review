@@ -22,6 +22,8 @@ object Sentiment {
     case "enthralled" => ValidationSuccess(Enthralled)
     case _ => ValidationFailure(NonEmptyList(s"$s is not a valid sentiment!"))
   }
+
+  def apply(s: String): Sentiment = fromString(s) getOrElse (throw new RuntimeException("Invalid Sentiment: "+s))
 }
 
 sealed trait Sentiment
@@ -30,6 +32,20 @@ case object Bored extends Sentiment
 case object Enthralled extends Sentiment
 
 object Review {
+  def apply(contentId: String, data: Map[String, String] ): Option[Review] = {
+    for {
+      author <- data get "userId" map UserId
+      sentiment <- data get "sentiment" map {Sentiment(_)}
+    } yield Review(
+      parent = ContentId(contentId),
+      author = author,
+      sentiment = sentiment,
+      comment = data.get("comment") map Comment,
+      createdAt = DateTime.now(),
+      0
+    )
+  }
+
   implicit val dynamoDbReads = new DynamoDBReads[Review] {
     override def fromAttributeValues(model: Map[String, DynamoDbAttributeValue]): ValidationNel[String, Review] = {
       import AttributeValue._
