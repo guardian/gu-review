@@ -74,7 +74,6 @@ object Review {
       "parent" -> AttributeValue.s(a.parent.get),
       "rating" -> AttributeValue.n(a.rating),
       "author" -> AttributeValue.s(a.author.get),
-      "author" -> AttributeValue.s(a.author.get),
       "sentiment" -> AttributeValue.s(Sentiment.stringify(a.sentiment)),
       "createdAt" -> AttributeValue.n(a.createdAt.getMillis)
     ) ++ a.comment.map(comment => Map("comment" -> AttributeValue.s(comment.get))).getOrElse(Map.empty)
