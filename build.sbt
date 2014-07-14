@@ -11,5 +11,6 @@ libraryDependencies ++= Seq(
   anorm,
   cache,
   ws,
-  "org.scalaz" %% "scalaz-core" % "7.0.6"
+  "org.scalaz" %% "scalaz-core" % "7.0.6",
+  "com.amazonaws" % "aws-java-sdk" % "1.8.4"
 )
