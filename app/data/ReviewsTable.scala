@@ -30,7 +30,7 @@ case class ReviewsTable(client: AmazonDynamoDBAsyncClient, tableName: String)(im
       response.getItems
         .map(DynamoDB.read[Review])
         .toList
-        .sequence[({type lambda[A] = ValidationNel[String, A]})#lambda, Review] match {
+        .sequence[({type λ[A] = ValidationNel[String, A]})#λ, Review] match {
         case ValidationSuccess(a) => a
         case ValidationFailure(errors) => throw new RuntimeException(errors.toList mkString "\n")
       }
