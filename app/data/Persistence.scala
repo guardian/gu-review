@@ -8,5 +8,5 @@ object Persistence {
   private val dynamoDbClient = new AmazonDynamoDBAsyncClient()
   dynamoDbClient.setRegion(Region.getRegion(Regions.EU_WEST_1))
 
-  val reviews = ReviewsTable(dynamoDbClient, "guReview")
+  val reviews = ReviewsTable(dynamoDbClient, "guReviews")
 }

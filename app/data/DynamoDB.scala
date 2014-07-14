@@ -103,5 +103,8 @@ object DynamoDB {
 
     def queryFuture(request: QueryRequest) =
       asFuture[QueryRequest, QueryResult](client.queryAsync(request, _))
+
+    def updateItemFuture(request: UpdateItemRequest) =
+      asFuture[UpdateItemRequest, UpdateItemResult](client.updateItemAsync(request, _))
   }
 }
