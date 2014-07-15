@@ -50,7 +50,7 @@ object Application extends Controller with Domain {
     Persistence.reviews.get(ContentId(contentId), 100) map { reviews =>
       Ok(Jsonp(request.queryString.get("callback").flatMap(_.headOption).getOrElse("callback"), Json.toJson(ReviewsResponse(
         views.html.reviews(reviews, domain),
-        views.html.sentiment(Statistics.fromReviews(reviews))
+        views.html.sentiment(Statistics.fromReviews(reviews), domain)
       ))))
     }
   }
