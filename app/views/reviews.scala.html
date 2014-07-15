@@ -64,8 +64,8 @@
                                         </span>
                                         <div class="d-comment__meta-text">
                                             <span itemscope="" itemprop="author" itemtype="http://schema.org/Person" title="Bill Dedman" class="d-comment__author">
-                                                <a href="https://profile.theguardian.com/user/id/@review.author" itemprop="url">
-                                                    <span itemprop="givenName">...</span>
+                                                <a href="https://profile.theguardian.com/user/id/@review.author.get" itemprop="url">
+                                                    <span itemprop="givenName">@review.author.get</span>
                                                 </a>
                                             </span>
 
@@ -94,7 +94,7 @@
 
                                         <div class="d-comment__main">
                                             <div class="d-comment__body" itemprop="text">
-                                                @review.comment.getOrElse("")
+                                                @review.comment.map(_.get).getOrElse("")
                                             </div>
 
                                             <div class="d-comment__actions">
