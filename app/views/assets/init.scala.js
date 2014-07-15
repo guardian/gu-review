@@ -21,7 +21,7 @@ require(["bonzo", "qwery", "bean", "reqwest"], function(bonzo, qwery, bean, reqw
             var sentiment = $(".review").data("sentiment"),
                 comment = $("review-comment").val();
             reqwest({
-                url: "@domain/review/" + document.location.pathname,
+                url: "@domain/review" + document.location.pathname,
                 method: "post",
                 crossOrigin: true,
                 data: {
@@ -61,6 +61,6 @@ require(["bonzo", "qwery", "bean", "reqwest"], function(bonzo, qwery, bean, reqw
             }
         };
 
-    console.log("blah", isReviewPage());
+    console.log("review", isReviewPage());
     initialLoad();
 });
