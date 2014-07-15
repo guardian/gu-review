@@ -19,7 +19,7 @@ require(["bonzo", "qwery", "bean", "reqwest"], function(bonzo, qwery, bean, reqw
         },
         doReview = function() {
             var sentiment = $(".review").data("sentiment"),
-                comment = $("review-comment").val();
+                comment = $("#review-comment").val();
             reqwest({
                 url: "@domain/review" + document.location.pathname,
                 method: "post",
