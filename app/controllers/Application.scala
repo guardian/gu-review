@@ -4,22 +4,21 @@ import play.api.mvc._
 import scala.concurrent.Future
 import model.{Comment, UserId, ContentId, Review}
 import org.joda.time.DateTime
+import data.Persistence
 import useful.Domain
 
 
-object Application extends Controller with Domain {
+object Application extends Controller with Domain{
+  val reviewsTable = Persistence.reviews
 
   def submitReview(contentId: String) = Action.async{ request =>
     val reviewOpt = request.body.asFormUrlEncoded flatMap { form =>
       val formData = form map {case (k, v) => (k, v.head)}
       Review(contentId, formData)
     }
-    Future{
-      reviewOpt map {r =>
-      //record review
-        Ok("")
-      } getOrElse BadRequest("")
-    }
+    reviewOpt map {r =>
+      reviewsTable.record(r) map {_ => Ok("")}
+      } getOrElse Future.successful(BadRequest(""))
   }
 
   def upVote(reviewId: String) = vote(reviewId, isUpVote = true)
@@ -29,8 +28,8 @@ object Application extends Controller with Domain {
     Ok("")
   }
 
-  def displayReviews(contentId: String) = Action { implicit request =>
-    val reviews = List(
+  def displayReviews(contentId: String) = Action {
+    val reviews: List[Review] = List(
       Review(
         ContentId("/books/2014/jul/13/empty-mansions-review-bill-dedman-huguette-clark"),
         UserId("123456"),
@@ -40,12 +39,6 @@ object Application extends Controller with Domain {
         rating = 1
       )
     ) // TODO @Nick
-
-    // should be:
-    // {
-    //   "html" -> views.html.reviews(reviews, domain)
-    //   "stats" -> JSON of the stats for the sentiment
-    // }
 
     Ok(views.html.reviews(reviews, domain))
   }
