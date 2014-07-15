@@ -1,1 +1,1 @@
-@(domain: String)
+@(domain: JavaScript)
