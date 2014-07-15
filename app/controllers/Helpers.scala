@@ -5,11 +5,12 @@ import model._
 import org.joda.time.DateTime
 import play.api.mvc.{Action, Controller}
 import Persistence.reviews.record
+import useful.Domain
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-object Helpers extends Controller {
+object Helpers extends Controller with Domain {
   def insertFixture() = Action.async {
     val contentId = ContentId("books/2014/jul/13/empty-mansions-review-bill-dedman-huguette-clark")
 
@@ -42,11 +43,11 @@ object Helpers extends Controller {
     )).map(Function.const(Ok("Inserted")))
   }
 
-  def testStatsTemplate() = Action {
+  def testStatsTemplate() = Action { implicit request =>
     Ok(views.html.sentiment(Statistics(Map(
       HatedIt -> 1,
       Indifferent -> 10,
       LovedIt -> 4
-    )), "//"))
+    )), domain))
   }
 }

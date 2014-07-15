@@ -43,34 +43,54 @@
     div.loved {
         color: lawngreen;
     }
+
+    .review {
+        background-color: #eeeeee;
+        border: solid 1px #ccc;
+        padding: 5px;
+    }
+
+    .js-hide {
+        display: none;
+    }
 </style>
 
 <div class="face-stats">
     <div class="face hated">
-        <img src="@domain@routes.Assets.at("images/hateditsmiley.jpg")" alt="Hated it" />
+        <img data-sentiment="hated" src="@domain@routes.Assets.at("images/hateditsmiley.jpg")" alt="Hated it" />
         <p>@statistics.percentageString(HatedIt)</p>
     </div>
 
     <div class="face disliked">
-        <img src="@domain@routes.Assets.at("images/sadface.jpg")" alt="Disliked it" />
+        <img data-sentiment="disliked" src="@domain@routes.Assets.at("images/sadface.jpg")" alt="Disliked it" />
         <p>@statistics.percentageString(DislikedIt)</p>
     </div>
 
     <div class="face indifferent">
-        <img src="@domain@routes.Assets.at("images/indifferentsmiley.jpg")" alt="Indifferent" />
+        <img data-sentiment="indifferent" src="@domain@routes.Assets.at("images/indifferentsmiley.jpg")" alt="Indifferent" />
         <p>@statistics.percentageString(Indifferent)</p>
     </div>
 
     <div class="face liked">
-        <img src="@domain@routes.Assets.at("images/smileyface.jpg")" alt="Liked it" />
+        <img data-sentiment="liked" src="@domain@routes.Assets.at("images/smileyface.jpg")" alt="Liked it" />
         <p>@statistics.percentageString(LikedIt)</p>
     </div>
 
     <div class="face loved">
-        <img src="@domain@routes.Assets.at("images/loveditsmiley.jpg")" alt="Loved it" />
+        <img data-sentiment="loved" src="@domain@routes.Assets.at("images/loveditsmiley.jpg")" alt="Loved it" />
         <p>@statistics.percentageString(LovedIt)</p>
     </div>
 
     <!-- HTML & CSS SUCK! -->
     <div style="clear: both;"></div>
+
+    <div class="review js-hide">
+        <form id="review-form">
+            <p>Add a review?</p>
+            <textarea id="review-comment" cols="30" rows="5"></textarea>
+            <div>
+                <button type="submit" class="submit-input d-comment-box__submit">Post your review</button>
+            </div>
+        </form>
+    </div>
 </div>
