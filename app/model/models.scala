@@ -49,7 +49,7 @@ object Review {
       parent = ContentId(contentId),
       author = author,
       sentiment = sentiment,
-      comment = data.get("comment") map Comment,
+      comment = data.get("comment") filter {_.isEmpty} map Comment,
       createdAt = DateTime.now(),
       0
     )
