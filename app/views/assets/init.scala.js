@@ -17,7 +17,7 @@ require(["bonzo", "qwery", "bean", "reqwest"], function(bonzo, qwery, bean, reqw
                     success: function(response) {
                         // insert stats and vote controls
                         $(".discussion__comments__container").html(response.reviews);
-
+                        $(".tone-background").append(bonzo(bonzo.create(response.statistics)));
                     }
                 });
             }
