@@ -18,6 +18,12 @@ require(["bonzo", "qwery", "bean", "reqwest"], function(bonzo, qwery, bean, reqw
                         // insert stats and vote controls
                         $(".discussion__comments__container").html(response.reviews);
                         $(".tone-background").append(bonzo(bonzo.create(response.statistics)));
+                        $(".face img").css("cursor", "pointer").each(function(el){
+                            bean.on(el, "click", function(e) {
+                                console.log(el);
+                                var el = bonzo(el);
+                            });
+                        });
                     }
                 });
             }
