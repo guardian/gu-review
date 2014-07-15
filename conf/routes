@@ -3,25 +3,27 @@
 # ~~~~
 
 # Submit a review
-POST        /review/*contentId                        controllers.Application.submitReview(contentId)
+POST           /review/*contentId                        controllers.Application.submitReview(contentId)
 
 # Recommend a review Up, submission must contain userId e.g. 11234
-POST        /recommend/:userId/up/*contentId          controllers.Application.upVote(contentId, userId)
+POST           /recommend/:userId/up/*contentId          controllers.Application.upVote(contentId, userId)
 
 # Recommend a review Down, submission must contain userId e.g. 11234
-POST        /recommend/:userId/down/*contentId        controllers.Application.downVote(contentId, userId)
+POST           /recommend/:userId/down/*contentId        controllers.Application.downVote(contentId, userId)
 
 # Display reviews
-GET         /reviews/*contentId                       controllers.Application.displayReviews(contentId)
+GET            /reviews/*contentId                       controllers.Application.displayReviews(contentId)
 
-GET         /assets/javascripts/init.js               controllers.Resources.initJs
-GET         /assets/javascripts/update.js             controllers.Resources.updateJs
+GET            /assets/javascripts/init.js               controllers.Resources.initJs
+GET            /assets/javascripts/update.js             controllers.Resources.updateJs
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                             controllers.Assets.at(path="/public", file)
+GET            /assets/*file                             controllers.Assets.at(path="/public", file)
 
 
 
-GET         /admin/insert-fixture                     controllers.Helpers.insertFixture()
+GET            /admin/insert-fixture                     controllers.Helpers.insertFixture()
 
-GET         /admin/stats-test                         controllers.Helpers.testStatsTemplate()
+GET            /admin/stats-test                         controllers.Helpers.testStatsTemplate()
+
+OPTIONS        /*all                                     controllers.Application.preflight(all: String)

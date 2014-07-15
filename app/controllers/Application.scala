@@ -28,11 +28,12 @@ case class ReviewsResponse(
 object Application extends Controller with Domain {
   private val reviewsTable = Persistence.reviews
 
-  def submitReview(contentId: String) = Action.async{ implicit request =>
+  def submitReview(contentId: String) = Action.async { implicit request =>
     val reviewOpt = request.body.asFormUrlEncoded flatMap { form =>
       val formData: Map[String, String] = form map {case (k, v) => (k, v.head)}
       Review(contentId, formData)
     }
+
     reviewOpt map {r =>
       reviewsTable.record(r) map {_ => Ok("")}
       } getOrElse Future.successful(BadRequest(""))
@@ -53,5 +54,13 @@ object Application extends Controller with Domain {
         views.html.sentiment(Statistics.fromReviews(reviews), domain)
       ))))
     }
+  }
+
+  def preflight(url: String) = Action {
+    Ok("").withHeaders(
+      "Access-Control-Allow-Origin" -> "*",
+      "Allow" -> "*",
+      "Access-Control-Allow-Methods" -> "POST, GET, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers" -> "Origin, X-Requested-With, Content-Type, Accept, Referer, User-Agent")
   }
 }
