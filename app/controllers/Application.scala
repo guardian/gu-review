@@ -1,14 +1,31 @@
 package controllers
 
-import _root_.data.Persistence
+import _root_.data.{Persistence, Statistics}
+import play.api._
+import play.api.libs.Jsonp
+import play.api.libs.json.{JsString, JsValue, Writes, Json}
 import play.api.mvc._
 import model.{UserId, ContentId}
+import play.twirl.api.Html
 import useful.Domain
 import model.Review
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-object Application extends Controller with Domain{
+object ReviewsResponse {
+  implicit val htmlWrites = new Writes[Html] {
+    override def writes(o: Html): JsValue = JsString(o.body)
+  }
+
+  implicit val jsonWrites = Json.writes[ReviewsResponse]
+}
+
+case class ReviewsResponse(
+  reviews: Html,
+  statistics: Html
+)
+
+object Application extends Controller with Domain {
   private val reviewsTable = Persistence.reviews
 
   def submitReview(contentId: String) = Action.async{ implicit request =>
@@ -30,14 +47,11 @@ object Application extends Controller with Domain{
   }
 
   def displayReviews(contentId: String) = Action.async { implicit request =>
-    // should be:
-    // {
-    //   "html" -> views.html.reviews(reviews, domain)
-    //   "stats" -> JSON of the stats for the sentiment
-    // }
-
     Persistence.reviews.get(ContentId(contentId), 100) map { reviews =>
-      Ok(views.html.reviews(reviews, domain))
+      Ok(Jsonp("", Json.toJson(ReviewsResponse(
+        views.html.reviews(reviews, domain),
+        views.html.sentiment(Statistics.fromReviews(reviews))
+      ))))
     }
   }
 }
