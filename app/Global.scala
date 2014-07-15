@@ -1,7 +1,5 @@
-import play.api.{Application, GlobalSettings}
 
-object Global extends GlobalSettings {
-  override def onStart(app: Application): Unit = {
-    super.onStart(app)
-  }
-}
+import play.api.mvc.WithFilters
+import play.api.Application
+
+object Global extends WithFilters(filters.CorsFilter)
