@@ -46,9 +46,9 @@ require(["bonzo", "qwery", "bean", "reqwest"], function(bonzo, qwery, bean, reqw
                         // insert stats and vote controls
                         $(".discussion__comments__container").html(response.reviews);
                         $(".tone-background").append(bonzo(bonzo.create(response.statistics)));
-                        $(".face img").css("cursor", "pointer").each(function(el){
-                            bean.on(el, "click", function(e) {
-                                var el = bonzo(el);
+                        $(".face img").css("cursor", "pointer").each(function(element){
+                            var el = bonzo(element);
+                            bean.on(element, "click", function(e) {
                                 popupReviewBox(el.data("sentiment"));
                             });
                         });
