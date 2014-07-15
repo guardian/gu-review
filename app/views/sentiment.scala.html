@@ -43,6 +43,16 @@
     div.loved {
         color: lawngreen;
     }
+
+    .review {
+        background-color: #eeeeee;
+        border: solid 1px #ccc;
+        padding: 5px;
+    }
+
+    .js-hide {
+        display: none;
+    }
 </style>
 
 <div class="face-stats">
@@ -73,4 +83,14 @@
 
     <!-- HTML & CSS SUCK! -->
     <div style="clear: both;"></div>
+
+    <div class="review js-hide">
+        <form id="review-form">
+            <p>Add a review?</p>
+            <textarea id="review-comment" cols="30" rows="5"></textarea>
+            <div>
+                <button type="submit" class="submit-input d-comment-box__submit">Post your review</button>
+            </div>
+        </form>
+    </div>
 </div>
