@@ -12,6 +12,7 @@
         top: 10px;
         right: 10px;
         text-align: center;
+        z-index: 10;
     }
 
     div.face {
@@ -20,8 +21,8 @@
     }
 
     div.face img {
-        width: 35px;
-        height: 40px;
+        width: 77px;
+        height: 79px;
     }
 
     div.hated {
@@ -48,43 +49,41 @@
         background-color: #eeeeee;
         border: solid 1px #ccc;
         padding: 5px;
-    }
-
-    .js-hide {
         display: none;
     }
 </style>
 
 <div class="face-stats">
-    <div class="face hated">
-        <img data-sentiment="hated" src="@domain@routes.Assets.at("images/hateditsmiley.jpg")" alt="Hated it" />
-        <p>@statistics.percentageString(HatedIt)</p>
-    </div>
 
-    <div class="face disliked">
-        <img data-sentiment="disliked" src="@domain@routes.Assets.at("images/sadface.jpg")" alt="Disliked it" />
-        <p>@statistics.percentageString(DislikedIt)</p>
-    </div>
-
-    <div class="face indifferent">
-        <img data-sentiment="indifferent" src="@domain@routes.Assets.at("images/indifferentsmiley.jpg")" alt="Indifferent" />
-        <p>@statistics.percentageString(Indifferent)</p>
+    <div class="face loved">
+        <img data-sentiment="loved" src="@domain@routes.Assets.at("images/smile1.jpg")" alt="Loved it" />
+        <p>@statistics.percentageString(LovedIt)</p>
     </div>
 
     <div class="face liked">
-        <img data-sentiment="liked" src="@domain@routes.Assets.at("images/smileyface.jpg")" alt="Liked it" />
+        <img data-sentiment="liked" src="@domain@routes.Assets.at("images/smile2.jpg")" alt="Liked it" />
         <p>@statistics.percentageString(LikedIt)</p>
     </div>
 
-    <div class="face loved">
-        <img data-sentiment="loved" src="@domain@routes.Assets.at("images/loveditsmiley.jpg")" alt="Loved it" />
-        <p>@statistics.percentageString(LovedIt)</p>
+    <div class="face indifferent">
+        <img data-sentiment="indifferent" src="@domain@routes.Assets.at("images/smile3.jpg")" alt="Indifferent" />
+        <p>@statistics.percentageString(Indifferent)</p>
+    </div>
+
+    <div class="face disliked">
+        <img data-sentiment="disliked" src="@domain@routes.Assets.at("images/smile4.jpg")" alt="Disliked it" />
+        <p>@statistics.percentageString(DislikedIt)</p>
+    </div>
+
+    <div class="face hated">
+        <img data-sentiment="hated" src="@domain@routes.Assets.at("images/smile5.jpg")" alt="Hated it" />
+        <p>@statistics.percentageString(HatedIt)</p>
     </div>
 
     <!-- HTML & CSS SUCK! -->
     <div style="clear: both;"></div>
 
-    <div class="review js-hide">
+    <div class="review">
         <form id="review-form">
             <p>Add a review?</p>
             <textarea id="review-comment" cols="30" rows="5"></textarea>
