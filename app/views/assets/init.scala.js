@@ -9,12 +9,12 @@ require(["bonzo", "qwery", "bean", "reqwest"], function(bonzo, qwery, bean, reqw
         },
         popupReviewBox = function(sentiment) {
             var reviewBox = $(".review");
-            reviewBox.show();
+            reviewBox.css("display", "block");
             reviewBox.data("sentiment", sentiment);
         },
         hideReviewBox= function() {
             var reviewBox = $(".review");
-            reviewBox.hide();
+            reviewBox.css("display", "none");
             reviewBox.data("sentiment", "");
         },
         doReview = function() {
@@ -49,12 +49,12 @@ require(["bonzo", "qwery", "bean", "reqwest"], function(bonzo, qwery, bean, reqw
                         $(".face img").css("cursor", "pointer").each(function(el){
                             bean.on(el, "click", function(e) {
                                 var el = bonzo(el);
-                                doReview(el.data("sentiment"));
+                                popupReviewBox(el.data("sentiment"));
                             });
                         });
-                        bean.on($("#review-form"), "submit", function(e){
+                        bean.on($("#review-form").get(0), "submit", function(e){
                             e.preventDefault();
-                            doReview();
+                            doReview()
                         });
                     }
                 });
