@@ -1,6 +1,6 @@
 package controllers
 
-import data.Persistence
+import data.{Statistics, Persistence}
 import model._
 import org.joda.time.DateTime
 import play.api.mvc.{Action, Controller}
@@ -12,10 +12,18 @@ object Helpers extends Controller {
     Persistence.reviews.record(Review(
       ContentId("books/2014/jul/13/empty-mansions-review-bill-dedman-huguette-clark"),
       UserId("123456"),
-      model.Bored,
+      model.Indifferent,
       Some(Comment("Comment")),
       DateTime.now,
       rating = 1
     )).map(Function.const(Ok("Inserted")))
+  }
+
+  def testStatsTemplate() = Action {
+    Ok(views.html.sentiment(Statistics(Map(
+      HatedIt -> 1,
+      Indifferent -> 10,
+      LovedIt -> 4
+    ))))
   }
 }
