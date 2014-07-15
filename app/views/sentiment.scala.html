@@ -1,41 +1,73 @@
-@(statistics: data.Statistics)
+@(statistics: data.Statistics, domain: String)
 @import model.{DislikedIt, HatedIt, Indifferent, LikedIt, LovedIt}
 
 <style type="text/css">
+    div.tone-background {
+        font: bold 14px Arial, Verdana, sans-serif;
+        position: relative;
+    }
+
     div.face-stats {
-        background-color: rgb(138, 49, 85);
+        position: absolute;
+        top: 10px;
+        right: 10px;
         text-align: center;
     }
 
     div.face {
         float: left;
-        width: 140px;
+        width: 70px;
+    }
+
+    div.face img {
+        width: 35px;
+        height: 40px;
+    }
+
+    div.hated {
+        color: red;
+    }
+
+    div.disliked {
+        color: orange;
+    }
+
+    div.indifferent {
+        color: yellow;
+    }
+
+    div.liked {
+        color: greenyellow;
+    }
+
+    div.loved {
+        color: lawngreen;
     }
 </style>
 
 <div class="face-stats">
-    <div class="face">
-        <img src="@routes.Assets.at("images/hateditsmiley.jpg")" alt="Hated it" />
+    <div class="face hated">
+        <img src="@domain@routes.Assets.at("images/hateditsmiley.jpg")" alt="Hated it" />
         <p>@statistics.percentageString(HatedIt)</p>
     </div>
 
-    <div class="face">
-        <img src="@routes.Assets.at("images/sadface.jpg")" alt="Disliked it" />
+    <div class="face disliked">
+        <img src="@domain@routes.Assets.at("images/sadface.jpg")" alt="Disliked it" />
         <p>@statistics.percentageString(DislikedIt)</p>
     </div>
 
-    <div class="face">
-        <img src="@routes.Assets.at("images/indifferentsmiley.jpg")" alt="Indifferent" />
+    <div class="face indifferent">
+        <img src="@domain@routes.Assets.at("images/indifferentsmiley.jpg")" alt="Indifferent" />
         <p>@statistics.percentageString(Indifferent)</p>
     </div>
 
-    <div class="face">
-        <img src="@routes.Assets.at("images/smileyface.jpg")" alt="Liked it" />
+    <div class="face liked">
+        <img src="@domain@routes.Assets.at("images/smileyface.jpg")" alt="Liked it" />
         <p>@statistics.percentageString(LikedIt)</p>
     </div>
 
-    <div class="face">
-        <img src="@routes.Assets.at("images/loveditsmiley.jpg")" alt="Loved it" />
+    <div class="face loved">
+        <img src="@domain@routes.Assets.at("images/loveditsmiley.jpg")" alt="Loved it" />
         <p>@statistics.percentageString(LovedIt)</p>
     </div>
 

@@ -24,6 +24,6 @@ object Helpers extends Controller {
       HatedIt -> 1,
       Indifferent -> 10,
       LovedIt -> 4
-    ))))
+    )), "//"))
   }
 }
