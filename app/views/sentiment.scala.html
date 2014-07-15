@@ -1,1 +1,44 @@
 @(statistics: data.Statistics)
+@import model.{DislikedIt, HatedIt, Indifferent, LikedIt, LovedIt}
+
+<style type="text/css">
+    div.face-stats {
+        background-color: rgb(138, 49, 85);
+        text-align: center;
+    }
+
+    div.face {
+        float: left;
+        width: 140px;
+    }
+</style>
+
+<div class="face-stats">
+    <div class="face">
+        <img src="@routes.Assets.at("images/hateditsmiley.jpg")" alt="Hated it" />
+        <p>@statistics.percentageString(HatedIt)</p>
+    </div>
+
+    <div class="face">
+        <img src="@routes.Assets.at("images/sadface.jpg")" alt="Disliked it" />
+        <p>@statistics.percentageString(DislikedIt)</p>
+    </div>
+
+    <div class="face">
+        <img src="@routes.Assets.at("images/indifferentsmiley.jpg")" alt="Indifferent" />
+        <p>@statistics.percentageString(Indifferent)</p>
+    </div>
+
+    <div class="face">
+        <img src="@routes.Assets.at("images/smileyface.jpg")" alt="Liked it" />
+        <p>@statistics.percentageString(LikedIt)</p>
+    </div>
+
+    <div class="face">
+        <img src="@routes.Assets.at("images/loveditsmiley.jpg")" alt="Loved it" />
+        <p>@statistics.percentageString(LovedIt)</p>
+    </div>
+
+    <!-- HTML & CSS SUCK! -->
+    <div style="clear: both;"></div>
+</div>

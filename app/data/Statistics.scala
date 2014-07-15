@@ -12,4 +12,13 @@ object Statistics {
   }
 }
 
-case class Statistics(counts: Map[Sentiment, Int])
+case class Statistics(counts: Map[Sentiment, Int]) {
+  lazy val total = counts.values.reduce(_ + _)
+
+  def percentage(sentiment: Sentiment) = total match {
+    case 0 => 0f
+    case otherwise => 100 * (counts.getOrElse(sentiment, 0).toFloat / total)
+  }
+
+  def percentageString(sentiment: Sentiment) = "%.2f%%".format(percentage(sentiment))
+}

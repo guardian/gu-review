@@ -13,13 +13,19 @@ case class UserId(get: String) extends AnyVal
 
 object Sentiment {
   def stringify(s: Sentiment) = s match {
-    case Bored => "bored"
-    case Enthralled => "enthralled"
+    case HatedIt => "hated"
+    case DislikedIt => "disliked"
+    case Indifferent => "indifferent"
+    case LikedIt => "liked"
+    case LovedIt => "loved"
   }
 
   def fromString(s: String): ValidationNel[String, Sentiment] = s match {
-    case "bored" => ValidationSuccess(Bored)
-    case "enthralled" => ValidationSuccess(Enthralled)
+    case "hated" => ValidationSuccess(HatedIt)
+    case "disliked" => ValidationSuccess(DislikedIt)
+    case "indifferent" => ValidationSuccess(Indifferent)
+    case "liked" => ValidationSuccess(LikedIt)
+    case "loved" => ValidationSuccess(LovedIt)
     case _ => ValidationFailure(NonEmptyList(s"$s is not a valid sentiment!"))
   }
 
@@ -28,8 +34,11 @@ object Sentiment {
 
 sealed trait Sentiment
 
-case object Bored extends Sentiment
-case object Enthralled extends Sentiment
+case object HatedIt extends Sentiment
+case object DislikedIt extends Sentiment
+case object Indifferent extends Sentiment
+case object LikedIt extends Sentiment
+case object LovedIt extends Sentiment
 
 object Review {
   def apply(contentId: String, data: Map[String, String] ): Option[Review] = {
