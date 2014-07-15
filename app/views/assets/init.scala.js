@@ -9,14 +9,15 @@ require(["bonzo", "qwery", "bean", "reqwest"], function(bonzo, qwery, bean, reqw
         },
         initialLoad = function() {
             if (isReviewPage()) {
-                var reviewDataUrl = "@domain/reviews" + document.location.pathname + "?callback=?";
+                var reviewDataUrl = "@domain/reviews" + document.location.pathname;
                 reqwest({
                     url: reviewDataUrl,
                     method: 'get',
                     type: "jsonp",
                     success: function(response) {
                         // insert stats and vote controls
-                        $(".discussion__comments__container").html(response.html);
+                        $(".discussion__comments__container").html(response.reviews);
+
                     }
                 });
             }
