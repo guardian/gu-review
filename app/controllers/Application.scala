@@ -1,5 +1,6 @@
 package controllers
 
+import _root_.data.Persistence
 import play.api._
 import play.api.mvc._
 import model.{Comment, UserId, ContentId, Review}
@@ -20,24 +21,15 @@ object Application extends Controller with Domain {
     Ok("")
   }
 
-  def displayReviews(contentId: String) = Action { implicit request =>
-    val reviews = List(
-      Review(
-        ContentId("/books/2014/jul/13/empty-mansions-review-bill-dedman-huguette-clark"),
-        UserId("123456"),
-        model.Bored,
-        Some(Comment("Comment")),
-        DateTime.now,
-        rating = 1
-      )
-    ) // TODO @Nick
-
+  def displayReviews(contentId: String) = Action.async { implicit request =>
     // should be:
     // {
     //   "html" -> views.html.reviews(reviews, domain)
     //   "stats" -> JSON of the stats for the sentiment
     // }
 
-    Ok(views.html.reviews(reviews, domain))
+    Persistence.reviews.get(ContentId(contentId), 100) map { reviews =>
+      Ok(views.html.reviews(reviews, domain))
+    }
   }
 }
