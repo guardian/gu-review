@@ -48,6 +48,7 @@ case class ReviewsTable(client: AmazonDynamoDBAsyncClient, tableName: String)(im
 
   def upVote(contentId: ContentId, authorId: UserId): Future[Unit] = {
     val request = new UpdateItemRequest()
+      .withTableName(tableName)
       .withKey(reviewKey(contentId, authorId))
       .withAttributeUpdates(Map(
         "rating" -> new AttributeValueUpdate()
@@ -60,6 +61,7 @@ case class ReviewsTable(client: AmazonDynamoDBAsyncClient, tableName: String)(im
 
   def downVote(contentId: ContentId, authorId: UserId): Future[Unit] = {
     val request = new UpdateItemRequest()
+      .withTableName(tableName)
       .withKey(reviewKey(contentId, authorId))
       .withAttributeUpdates(Map(
       "rating" -> new AttributeValueUpdate()

@@ -3,10 +3,10 @@ package controllers
 import _root_.data.Persistence
 import play.api._
 import play.api.mvc._
-import model.{Comment, UserId, ContentId, Review}
-import org.joda.time.DateTime
+import model.{UserId, ContentId}
 import useful.Domain
 
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object Application extends Controller with Domain {
 
@@ -14,11 +14,12 @@ object Application extends Controller with Domain {
     Ok("")
   }
 
-  def upVote(reviewId: String) = vote(reviewId, isUpVote = true)
-  def downVote(reviewId: String) = vote(reviewId, isUpVote = false)
+  def upVote(contentId: String, userId: String) = Action.async {
+    Persistence.reviews.upVote(ContentId(contentId), UserId(userId)).map(Function.const(Ok("Upvoted!")))
+  }
 
-  def vote(reviewId: String, isUpVote: Boolean) = Action {
-    Ok("")
+  def downVote(contentId: String, userId: String) = Action.async {
+    Persistence.reviews.downVote(ContentId(contentId), UserId(userId)).map(Function.const(Ok("Downvoted!")))
   }
 
   def displayReviews(contentId: String) = Action.async { implicit request =>
