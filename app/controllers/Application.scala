@@ -1,10 +1,9 @@
 package controllers
 
-import _root_.data.{Statistics, Persistence}
+import _root_.data.{Persistence, Statistics}
 import play.api._
 import play.api.libs.Jsonp
 import play.api.libs.json.{JsString, JsValue, Writes, Json}
-import _root_.data.Persistence
 import play.api.mvc._
 import model.{UserId, ContentId}
 import play.twirl.api.Html
@@ -27,7 +26,6 @@ case class ReviewsResponse(
 )
 
 object Application extends Controller with Domain {
-object Application extends Controller with Domain{
   private val reviewsTable = Persistence.reviews
 
   def submitReview(contentId: String) = Action.async{ implicit request =>
