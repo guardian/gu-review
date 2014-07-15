@@ -41,15 +41,15 @@ case object LikedIt extends Sentiment
 case object LovedIt extends Sentiment
 
 object Review {
-  def apply(contentId: String, data: Map[String, String] ): Option[Review] = {
+  def apply(contentId: String, data: Map[String, String]): Option[Review] = {
     for {
       author <- data get "userId" map UserId
-      sentiment <- data get "sentiment" map {Sentiment(_)}
+      sentiment <- data get "sentiment" map { Sentiment(_) }
     } yield Review(
       parent = ContentId(contentId),
       author = author,
       sentiment = sentiment,
-      comment = data.get("comment") filter {_.isEmpty} map Comment,
+      comment = data.get("comment") filterNot { _.isEmpty } map Comment,
       createdAt = DateTime.now(),
       0
     )
