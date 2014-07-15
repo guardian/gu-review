@@ -1,6 +1,17 @@
 @(reviews: List[model.Review], domain: String)
 
+<style type="text/css">
+.d-discussion--partial .d-comment--top-level:nth-of-type(n+3) {
+    display: block;
+}
+</style>
+<ol class="tabs__container tabs__container--multiple" data-link-name="Football match nav">
+    <li class="tabs__tab tabs__tab--selected tone-colour tone-accent-border"><span class="tab__link">Reviews</span></li>
+    <li class="tabs__tab"><a href="http://www.theguardian.com/football/2014/jul/13/world-cup-final-2014-germany-v-argentina-live-report" data-link-name="Min-by-min">Comments</a></li>
+</ol>
+
 <div class="discussion__comments__container">
+
     <h2 class="page-sub-header discussion__heading js-visible">All reviews <span class="discussion__comment-count">(@reviews.size)</span></h2>
 
     <div class="discussion-container js-discussion-container">
